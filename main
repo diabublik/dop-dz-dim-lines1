@@ -1,0 +1,36 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int main() {
+	char** text = new char*[20];
+	char str[100];
+	int numoflines = 0;
+	puts("Input line or ENTER:");
+	while (gets_s(str), strlen(str) != 0) {
+		*(text + numoflines) = new char[strlen(str)];
+		strcpy(*(text + numoflines), str);
+		numoflines++;
+	}
+	puts("-----------------The original text-----------------\n");
+	for (int i = 0; i < numoflines; i++) {
+		printf("%s\n", *(text + i));
+	}
+	puts("\n---------------------------------------------------\n");
+	puts("|     WORD     |     ADRESS     |     LENGTH     |");
+	for (int i = 0; i < numoflines; i++) {
+		char templine[100];
+		strcpy(templine, *(text + i));
+		char* token = strtok(*(text + i), " ");/////////////////////
+		while (token != NULL) {
+			int len = strlen(token);
+			printf("  %12s  %p %8d  ", token, token, len);
+			token = strtok(NULL, " ");
+			puts("");
+		}
+		puts("");
+	}
+	puts("---------------------------------------------------\n");
+
+	return 0;
+}
